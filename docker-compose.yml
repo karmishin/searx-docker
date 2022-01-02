@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  searxng:
+    image: searxng/searxng:latest
+    restart: unless-stopped
+    environment:
+      - MORTY_URL=${URL}/morty/
+      - MORTY_KEY=${MORTY_KEY}
+
+  filtron:
+    image: ghcr.io/karmishin/filtron:master
+    command: "-listen 0.0.0.0:4004 -target searxng:8080"
+    restart: unless-stopped
+    volumes:
+      - ./rules.json:/etc/filtron/rules.json
+    ports:
+      - "127.0.0.1:4004:4004"
+
+  morty:
+    image: ghcr.io/karmishin/morty:master
+    restart: unless-stopped
+    environment:
+      - MORTY_KEY=${MORTY_KEY}
+    ports:
+      - "127.0.0.1:3000:3000"
+
+
