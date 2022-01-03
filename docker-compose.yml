@@ -21,8 +21,7 @@ services:
     image: ghcr.io/karmishin/morty:master
     restart: unless-stopped
     environment:
+      - MORTY_ADDRESS=0.0.0.0:3000
       - MORTY_KEY=${MORTY_KEY}
     ports:
       - "127.0.0.1:3000:3000"
-
-
