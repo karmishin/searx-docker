@@ -70,16 +70,6 @@
                 ]
             },
             {
-                "name": "block Connection:close",
-                "filters": ["Header:Connection=close"],
-                "limit": 0,
-                "stop": true,
-                "actions": [
-                    {"name": "block",
-                     "params": {"message": "Rate limit exceeded"}}
-                ]
-            },
-            {
                 "name": "block no gzip support",
                 "filters": ["!Header:Accept-Encoding=(^gzip$|^gzip[;,]|[; ]gzip$|[; ]gzip[;,])"],
                 "limit": 0,
